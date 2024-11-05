@@ -8,8 +8,8 @@
 		"Me!"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Cierra-Runis",
+		"sources": "https://github.com/Cierra-Runis/Survired"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/survired/icon.png",
@@ -48,7 +48,5 @@
 		"fabric-api": "*",
 		"fabric-language-kotlin": "*"
 	},
-	"suggests": {
-		"another-mod": "*"
-	}
+	"suggests": {}
 }
