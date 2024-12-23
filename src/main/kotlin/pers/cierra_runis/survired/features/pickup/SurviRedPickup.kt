@@ -8,27 +8,29 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.ActionResult
 import pers.cierra_runis.survired.common.SurviRedRegister
 
+
 object SurviRedPickup : SurviRedRegister {
-    override fun register() {
-        UseEntityCallback.EVENT.register(UseEntityCallback { playerEntity, world, hand, entity, entityHitResult ->
-            if (!playerEntity.isSneaking) return@UseEntityCallback ActionResult.PASS
 
-            val spawnEgg = SpawnEggItem.forEntity(entity.type) ?: return@UseEntityCallback ActionResult.FAIL
+  override fun surviRedRegister() {
+    UseEntityCallback.EVENT.register { playerEntity, world, hand, entity, entityHitResult ->
+      if (!playerEntity.isSneaking) return@register ActionResult.PASS
 
-            val entityNbt = entity.writeNbt(NbtCompound())
-            for (key in arrayOf("Pos", "Motion", "Rotation", "UUID")) entityNbt.remove(key)
+      val spawnEgg = SpawnEggItem.forEntity(entity.type) ?: return@register ActionResult.FAIL
 
-            val stack = ItemStack(spawnEgg).apply {
-                nbt = NbtCompound().apply {
-                    put("EntityTag", entityNbt)
-                }
-            }
+      val entityNbt = entity.writeNbt(NbtCompound())
+      for (key in arrayOf("Pos", "Motion", "Rotation", "UUID")) entityNbt.remove(key)
 
-            if (playerEntity.inventory.emptySlot != -1) playerEntity.giveItemStack(stack)
-            else playerEntity.dropItem(stack, true)
+      val stack = ItemStack(spawnEgg).apply {
+        nbt = NbtCompound().apply {
+          put("EntityTag", entityNbt)
+        }
+      }
 
-            entity.remove(Entity.RemovalReason.DISCARDED)
-            return@UseEntityCallback ActionResult.SUCCESS
-        })
+      if (playerEntity.inventory.emptySlot != -1) playerEntity.giveItemStack(stack)
+      else playerEntity.dropItem(stack, true)
+
+      entity.remove(Entity.RemovalReason.DISCARDED)
+      return@register ActionResult.SUCCESS
     }
+  }
 }
