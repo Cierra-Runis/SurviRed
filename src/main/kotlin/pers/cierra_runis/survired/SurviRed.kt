@@ -8,6 +8,7 @@ import pers.cierra_runis.survired.features.rename.SurviRedRename
 
 object SurviRed : ModInitializer {
   private val logger = LoggerFactory.getLogger(this.javaClass)
+
   override fun onInitialize() {
     SurviRedPickup.surviRedRegister()
     SurviRedRename.surviRedRegister()

@@ -1,0 +1,5 @@
+[*.{kt,kts}]
+# https://ktlint.github.io/ktlint/latest/rules/standard/#indentation
+indent_size = 2
+# https://ktlint.github.io/ktlint/latest/rules/standard/#multiline-expression-wrapping
+ktlint_standard_multiline-expression-wrapping = disabled

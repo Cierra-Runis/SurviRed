@@ -8,9 +8,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.ActionResult
 import pers.cierra_runis.survired.common.SurviRedRegister
 
-
 object SurviRedPickup : SurviRedRegister {
-
   override fun surviRedRegister() {
     UseEntityCallback.EVENT.register { playerEntity, world, hand, entity, entityHitResult ->
       if (!playerEntity.isSneaking) return@register ActionResult.PASS
@@ -26,8 +24,11 @@ object SurviRedPickup : SurviRedRegister {
         }
       }
 
-      if (playerEntity.inventory.emptySlot != -1) playerEntity.giveItemStack(stack)
-      else playerEntity.dropItem(stack, true)
+      if (playerEntity.inventory.emptySlot != -1) {
+        playerEntity.giveItemStack(stack)
+      } else {
+        playerEntity.dropItem(stack, true)
+      }
 
       entity.remove(Entity.RemovalReason.DISCARDED)
       return@register ActionResult.SUCCESS
